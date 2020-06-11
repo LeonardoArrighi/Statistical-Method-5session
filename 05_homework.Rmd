@@ -99,10 +99,10 @@ roller.lm <- lm(depression~weight, data=roller_mod)
 roller.lm2 <- lm(depression~weight+I(weight^2), data=roller_mod)
 anova(roller.lm, roller.lm2)
 ```
-Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models. We confirm than our initial choice that there is statistical reason to prefer one model to the other.
+Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models.
 ##### Conclusion
 
-Conclusions.
+We confirm our initial choice, namely there is no statistical reason to prefer one model to the other.
 
 #### Exercise x
 
