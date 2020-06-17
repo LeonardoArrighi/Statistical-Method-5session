@@ -104,14 +104,25 @@ Now the p-value is even higher than before. This means that the points analysed 
 
 We confirm our initial choice, namely there is no statistical reason to prefer one model to the other.
 
+### Chapter 4 {.tabset}
+
+#### Exercise 11
+The table UCBAdmissions was discussed in Subsection 2.2.1. The following gives a table
+that adds the 2 × 2 tables of admission data over all departments:
+` ## UCBAdmissions is in the datasets package For each combination of margins 1 and 2, calculate the sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)`
+
+What are the names of the two dimensions of this table?
+
+##### Solution
+
+```{r Test_ex, code = readLines("src/DAAG411.R"), echo=TRUE}
+```
+
 #### Exercise x
 
 Text here.
 
-##### Solution
 
-```{r Test_ex, code = readLines("src/Test_ex.R"), echo=TRUE}
-```
 
 ##### Observations
 
