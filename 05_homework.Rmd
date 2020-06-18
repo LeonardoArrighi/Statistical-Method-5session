@@ -61,16 +61,68 @@ library(DAAG)
 
 ## DAAG EXERCISES {.tabset}
 
-### Chapter x {.tabset}
+### Chapter 7 {.tabset}
+
+#### Exercise 2
+
+Use `anova()` to compare the two models:
+```
+roller.lm <- lm(depression~weight, data=roller)
+roller.lm2 <- lm(depression~weight+I(weight^2), data=roller)
+```
+Is there any justification for including the squared term?
+
+##### Solution
+
+```{r}
+roller.lm <- lm(depression~weight, data=roller)
+roller.lm2 <- lm(depression~weight+I(weight^2), data=roller)
+anova(roller.lm, roller.lm2) #P-f test- very high
+```
+
+
+##### Observations
+
+From the $F$ test it is possible to notice that the probability $Pr(F\geq f_{obs})$ is quite high, assuming the null hypothesis $H_0:\beta_{weight^2} = 0$ is true. Thus, as there is no significant difference between the two models we can keep the simpler one, namely `roller.lm`. However let's see the diagnostic plots.
+
+```{r}
+par(mfrow=c(2,2))
+plot(roller.lm)
+par(mfrow=c(2,2))
+plot(roller.lm2)
+```
+In both models it is possible to observe that there is a problematic observation, the one labeled with 10, 5 and 7. The plots `Residuals vs Leverage`, `Scale-Location` and `Normal Q-Q` show clearly that the aforementioned points are suspect. Let's remove it and refit the models.
+```{r}
+remove <- c("5", "7", "10")
+roller_mod <- roller[!rownames(roller) %in% remove,]
+roller.lm <- lm(depression~weight, data=roller_mod)
+roller.lm2 <- lm(depression~weight+I(weight^2), data=roller_mod)
+anova(roller.lm, roller.lm2)
+```
+Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models.
+##### Conclusion
+
+We confirm our initial choice, namely there is no statistical reason to prefer one model to the other.
+
+### Chapter 4 {.tabset}
+
+#### Exercise 11
+The table UCBAdmissions was discussed in Subsection 2.2.1. The following gives a table
+that adds the 2 × 2 tables of admission data over all departments:
+` ## UCBAdmissions is in the datasets package For each combination of margins 1 and 2, calculate the sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)`
+
+What are the names of the two dimensions of this table?
+
+##### Solution
+
+```{r Test_ex, code = readLines("src/DAAG411.R"), echo=TRUE}
+```
 
 #### Exercise x
 
 Text here.
 
-##### Solution
 
-```{r Test_ex, code = readLines("src/Test_ex.R"), echo=TRUE}
-```
 
 ##### Observations
 
