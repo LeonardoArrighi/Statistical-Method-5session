@@ -162,21 +162,6 @@ apply(UCBAdmissions, 3,
 ```
 The odds ration is not consistent across the departments. In particular, department A has a very low odds ratio compared to the others. The nature of this difference can be observed in the mosaic plots showed above, where it is possible to notice that the number of females is significantly lower than the number of males. (Also department B has this problem.)
 
-#### Exercise x
-
-Text here.
-
-
-
-##### Observations
-
-Observations.
-
-##### Conclusion
-
-Conclusions.
-
-
 
 ## CASI EXERCISES {.tabset}
 
@@ -256,3 +241,74 @@ Cov(Y_j-\bar{Y},\bar{Y}) &= Cov(Y_j,\bar{Y})-Cov(\bar{Y},\bar{Y})\\
 \end{align}
 $$
 Then, we can conclude that $\bar{Y}$ and $\hat{Y}=(Y_1-\bar{Y},Y_2-\bar{Y},Y_3-\bar{Y})$ are independent normal vectors, and so $\bar{Y}$ is independent of $\hat{Y}^T \hat{Y} = n Z$.
+
+
+### Chapter 4 {.tabset}
+
+#### Exercise 4 {.tabset}
+
+Suppose that you have $n$ independent measurements of times between major aircraft disasters, $t_i$, and believe that the probability density function for the $t_i$’s is of the form: $f(t) = ke ^{−\lambda t}, t \geq 0$ where $\lambda$ and $k$ are the same for all $i$. 
+
+(a) By considering the normal p.d.f., show that $k = \sqrt{4\lambda/\pi}$. 
+
+(b) Obtain a maximum likelihood estimator for $\lambda$. 
+
+(c) Given observations of $T_i$ (in days) of: $243, 14, 121, 63, 45, 407$ and $34$ use a generalised likelihood ratio test to test $H_0 : \lambda = 10^{−4}$ against the alternative of no restriction on $\lambda$ at the $5%$
+significance level. Note that if $V \sim \chi^2_1$ then $Pr[V ≤ 3.841] = 0.95$.
+
+
+
+##### Solution (a)
+Recalling the definition of normal p.d.f.:
+$$
+f(t) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{t-\mu}{\sigma}\right)^2},
+$$
+we can procede computing algebric steps to link the normal p.d.f. to the given one.
+$$
+\begin{align}
+f(t) &= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}\\
+&= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} (t^2)} \qquad (\mu = xt)\\
+\end{align}
+$$
+Hence:
+$$
+\begin{cases}
+\lambda = \frac{(x-1)^2}{2\sigma^2} \\
+k= \frac{1}{\sqrt{2\pi\sigma^2}}
+\end{cases}
+$$
+substituting the first equation in the following one, we can obtain the result:
+$$
+\begin{aligned}
+k &=\frac{1}{\sqrt{2\pi\frac{(x-1)^2}{2\lambda}}} \\
+&= \sqrt{\frac{\lambda}{\pi(x-1)^2}}.
+\end{aligned}
+$$
+##### Solution (b)
+Starting from the previous result, we can assume:
+$$
+t_i \sim f(t) = \sqrt{\frac{4\lambda}{\pi}}e^{-\lambda t^2}
+$$
+where $\lambda$ is the same for all $i$.
+Due to the fact that $t_i$s are i.i.d., from the definition of loglikelihood, we can obtain a good estimator for $\lambda$ calculating:
+$$
+l(\lambda) = \log(f(t|\lambda)).
+$$
+Thus, for $t_i=x_i$, for $i=1,...,n$:
+$$
+\begin{align}
+l(\lambda) &= \sum_{i=1}^n \log(f(x_i|\lambda))\\
+&= \sum_{i=1}^n \log\left(\sqrt{\frac{4\lambda}{\pi}}e^{-\lambda x_i^2}\right)\\
+&= \sum_{i=1}^n \left(\log\left(\sqrt{\frac{4\lambda}{\pi}}\right) -\lambda x_i^2\right)\\
+&= n\log\left(\sqrt{\frac{4\lambda}{\pi}}\right) - \sum_{i=1}^n \lambda x_i^2.
+\end{align}
+$$
+Calculating $\frac{\partial l}{\partial \lambda}$ and equalling it to $0$, we can obtain a maximum likelihood estimator for $\lambda$.
+$$
+\begin{aligned}
+\frac{\partial l}{\partial \lambda} &= \frac{n}{2\lambda} - \sum_{i=1}^n x_i^2 = 0 \\
+\Rightarrow \lambda &= \sum_{i=1}^n \frac{1}{2 x_i^2} . 
+\end{aligned}
+$$
+##### Solution (c)
+
