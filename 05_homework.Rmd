@@ -203,22 +203,56 @@ Conclusions.
 
 ## CS EXERCISES {.tabset}
 
-### Chapter x {.tabset}
+### Chapter 1 {.tabset}
 
-#### Exercise x
+#### Exercise 7
 
-Text here.
+Let $Y_1$, $Y_2$ and $Y_3$ be independent $N(\mu,\sigma^2)$ r.v.s. Somehow using the matrix
+$$
+A=\left[\begin{array}{cc} 
+1/3 & 1/3 & 1/3\\
+2/3 & -1/3 & -1/3 \\
+-1/3 & 2/3 & -1/3
+\end{array}\right]
+$$
+show that
+$$
+\bar{Y}=\sum_{i=1}^3 Y_i /3
+$$
+and
+$$
+Z=\sum_{i=1}^3 (Y_i - \bar{Y})^2
+$$
+are independent random variables.
 
 ##### Solution
 
-```{r Test_ex, code = readLines("src/Test_ex.R"), echo=TRUE}
-```
-
-##### Observations
-
-Observations.
-
-##### Conclusion
-
-Conclusions.
-
+Due to the fact that $Y_1$, $Y_2$ and $Y_3$ are independent and distributed as $N(\mu,\sigma^2)$:
+$$
+\bar{Y}\sim N\left(\mu,\frac{\sigma^2}{n}\right).
+$$
+Due to the fact that $Z$ is a function of $Y_1$, $Y_2$ and $Y_3$, only, it is independent to $\bar{Y}$.
+Hence, calling $Y=(Y_1,Y_2,Y_3)$, we can notice that, from the definition of scalar product:
+$$
+A\cdot Y = \begin{cases} \bar Y \\ 
+Y_1 - \bar{Y}\\
+Y_2 - \bar{Y}
+\end{cases}
+$$
+Observing that the sum of two independent normal random variables has a normal distribution, we can conclude that $Y_1 - \bar{Y}$ and $Y_2 - \bar{Y}$ have a normal distribution and, similarly, we can obtain the same result for $Y_3 - \bar{Y}$). 
+More specifically, for $j=1,2,3$:
+$$
+\begin{align}
+Y_j - \bar{Y} &= \frac{2}{3} Y_j - \frac{1}{3}\sum_{i\neq j} Y_i \\
+&\sim N\left(\frac{2\,\mu}{3}-\frac{2\,\mu}{3}, \, 4\cdot\frac{\sigma^2}{9}+2\cdot\frac{\sigma^2}{9}\right)\\
+&=N\left( 0,\, \frac{2}{3}\,\sigma^2\right) .
+\end{align}
+$$
+Hence, for $j=1,2,3$ we have:
+$$
+\begin{align}
+Cov(Y_j-\bar{Y},\bar{Y}) &= Cov(Y_j,\bar{Y})-Cov(\bar{Y},\bar{Y})\\
+&= \frac{\sigma^2}{3} - \frac{\sigma^2}{3} \\ &= 0. 
+\end{align}
+$$
+Then, we can conclude that $\bar{Y}$ and $\hat{Y}=(Y_1-\bar{Y},Y_2-\bar{Y},Y_3-\bar{Y})$ are independent normal vectors, and so $\bar{Y}$ is independent of $\hat{Y}^T \hat{Y} = n Z$.
