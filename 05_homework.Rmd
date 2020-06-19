@@ -111,12 +111,56 @@ The table UCBAdmissions was discussed in Subsection 2.2.1. The following gives a
 that adds the 2 × 2 tables of admission data over all departments:
 ` ## UCBAdmissions is in the datasets package For each combination of margins 1 and 2, calculate the sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)`
 
-What are the names of the two dimensions of this table?
 
 ##### Solution
 
-```{r Test_ex, code = readLines("src/DAAG411.R"), echo=TRUE}
+```{r}
+UCBAdmissions <- UCBAdmissions
+UCBAdmissions
+sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)
+sumUCBtotal
 ```
+What are the names of the two dimensions of this table?
+They are *Gender* and *Admit*.
+
+(a) From the table `UCBAdmissions`, create mosaic plots for each faculty separately. (If
+necessary refer to the code given in the help page for `UCBAdmissions`.)
+
+```{r}
+# (a)
+faculties <- c('A', 'B', 'C', 'D', 'E', 'F')
+for (faculty in faculties) {
+    mosaicplot(UCBAdmissions[,,faculty], main = paste("Faculty", faculty))
+}
+```
+
+(b) Compare the information in the table `UCBtotal` with the result from applying the
+function `mantelhaen.test()` to the table `UCBAdmissions`. Compare the two
+sets of results, and comment on the difference.
+```{r}
+#(b)
+mantelhaen.test(UCBAdmissions)
+sumUCBtotal
+```
+The Mantel-Haenszel test is an inferential test for the association between two binary variables, while controlling for a third confounding nominal variable. Essentially, the test examines the weighted association of a set of $2 × 2$ tables.
+In our case, we check if there is an association between the *Gender* and *Admit* over the different departments.
+The null-hypothesis states that there is no association between the two variables and it is possible to observe that the p-values is equal to $0.2323$, thus the test is not statistically significant and we accept $H_0$.
+The table `sumUCBtotal` it is possible to observe that there are more admitted males that females but also more rejected males than females.
+
+
+The Mantel–Haenzel test is valid only if the male-to-female odds ratio for admission is
+similar across departments. The following code calculates the relevant odds ratios:
+`apply(UCBAdmissions, 3, function(x) (x[1,1]*x[2,2])/(x[1,2]*x[2,1]))`
+Is the odds ratio consistent across departments? Which department(s) stand(s) out as
+different? What is the nature of the difference?
+
+```{r}
+#(c)
+apply(UCBAdmissions, 3,
+      function(x) (x[1,1]*x[2,2])/(x[1,2]*x[2,1])
+      )
+```
+The odds ration is not consistent across the departments. In particular, department A has a very low odds ratio compared to the others. The nature of this difference can be observed in the mosaic plots showed above, where it is possible to notice that the number of females is significantly lower than the number of males. (Also department B has this problem.)
 
 #### Exercise x
 
