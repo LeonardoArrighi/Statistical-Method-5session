@@ -7,12 +7,12 @@ UCBtotal
 # (a)
 faculties <- c('A', 'B', 'C', 'D', 'E', 'F')
 for (faculty in faculties) {
-    mosaicplot(UCBAdmissions[,,faculty])
+    mosaicplot(UCBAdmissions[,,faculty], main = paste("Faculty", faculty))
 }
 
 #(b)
 mantelhaen.test(UCBAdmissions)
-
+UCBtotal
 #(c)
 
 apply(UCBAdmissions, 3,
