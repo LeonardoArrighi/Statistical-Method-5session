@@ -441,7 +441,10 @@ anova(roller.lm, roller.lm2)</code></pre>
 ##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 ## 1      5 162.16                           
 ## 2      4 143.06  1    19.093 0.5338 0.5055</code></pre>
-<p>Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models. ##### Conclusion</p>
+<p>Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models.</p>
+</div>
+<div id="conclusion" class="section level5">
+<h5>Conclusion</h5>
 <p>We confirm our initial choice, namely there is no statistical reason to prefer one model to the other.</p>
 </div>
 </div>
@@ -583,7 +586,7 @@ str(df)</code></pre>
 <h5>Observations</h5>
 <p>Observations.</p>
 </div>
-<div id="conclusion" class="section level5">
+<div id="conclusion-1" class="section level5">
 <h5>Conclusion</h5>
 <p>Conclusions.</p>
 </div>
@@ -633,7 +636,7 @@ Cov(Y_j-\bar{Y},\bar{Y}) &amp;= Cov(Y_j,\bar{Y})-Cov(\bar{Y},\bar{Y})\\
 </div>
 <div id="chapter-4-1" class="section level3 tabset">
 <h3>Chapter 4</h3>
-<div id="exercise-4" class="section level4">
+<div id="exercise-4" class="section level4 tabset">
 <h4>Exercise 4</h4>
 <p>Suppose that you have <span class="math inline">\(n\)</span> independent measurements of times between major aircraft disasters, <span class="math inline">\(t_i\)</span>, and believe that the probability density function for the <span class="math inline">\(t_i\)</span>’s is of the form: <span class="math inline">\(f(t) = ke ^{−\lambda t}, t \geq 0\)</span> where <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(k\)</span> are the same for all <span class="math inline">\(i\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
@@ -641,8 +644,42 @@ Cov(Y_j-\bar{Y},\bar{Y}) &amp;= Cov(Y_j,\bar{Y})-Cov(\bar{Y},\bar{Y})\\
 <li><p>Obtain a maximum likelihood estimator for <span class="math inline">\(\lambda\)</span>.</p></li>
 <li><p>Given observations of <span class="math inline">\(T_i\)</span> (in days) of: <span class="math inline">\(243, 14, 121, 63, 45, 407\)</span> and <span class="math inline">\(34\)</span> use a generalised likelihood ratio test to test <span class="math inline">\(H_0 : \lambda = 10^{−4}\)</span> against the alternative of no restriction on <span class="math inline">\(\lambda\)</span> at the <span class="math inline">\(5%\)</span> significance level. Note that if <span class="math inline">\(V \sim \chi^2_1\)</span> then <span class="math inline">\(Pr[V ≤ 3.841] = 0.95\)</span>.</p></li>
 </ol>
-<div id="solution-4" class="section level5">
-<h5>Solution</h5>
+<div id="solution-a" class="section level5">
+<h5>Solution (a)</h5>
+<p>Recalling the definition of normal p.d.f.: <span class="math display">\[
+f(t) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{t-\mu}{\sigma}\right)^2},
+\]</span> we can procede computing algebric steps to link the normal p.d.f. to the given one. <span class="math display">\[
+\begin{align}
+f(t) &amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}\\
+&amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} (t^2)} \qquad (\mu = xt)\\
+\end{align}
+\]</span> Hence: <span class="math display">\[
+\begin{cases}
+\lambda = \frac{(x-1)^2}{2\sigma^2} \\
+k= \frac{1}{\sqrt{2\pi\sigma^2}}
+\end{cases}
+\]</span> substituting the first equation in the following one, we can obtain the result: <span class="math display">\[
+\begin{aligned}
+k &amp;=\frac{1}{\sqrt{2\pi\frac{(x-1)^2}{2\lambda}}} \\
+&amp;= \sqrt{\frac{\lambda}{\pi(x-1)^2}}.
+\end{aligned}
+\]</span> ##### Solution (b) Starting from the previous result, we can assume: <span class="math display">\[
+t_i \sim f(t) = \sqrt{\frac{4\lambda}{\pi}}e^{-\lambda t^2}
+\]</span> where <span class="math inline">\(\lambda\)</span> is the same for all <span class="math inline">\(i\)</span>. Due to the fact that <span class="math inline">\(t_i\)</span>s are i.i.d., from the definition of loglikelihood, we can obtain a good estimator for <span class="math inline">\(\lambda\)</span> calculating: <span class="math display">\[
+l(\lambda) = \log(f(t|\lambda)).
+\]</span> Thus, for <span class="math inline">\(t_i=x_i\)</span>, for <span class="math inline">\(i=1,...,n\)</span>: <span class="math display">\[
+\begin{align}
+l(\lambda) &amp;= \sum_{i=1}^n \log(f(x_i|\lambda))\\
+&amp;= \sum_{i=1}^n \log\left(\sqrt{\frac{4\lambda}{\pi}}e^{-\lambda x_i^2}\right)\\
+&amp;= \sum_{i=1}^n \left(\log\left(\sqrt{\frac{4\lambda}{\pi}}\right) -\lambda x_i^2\right)\\
+&amp;= n\log\left(\sqrt{\frac{4\lambda}{\pi}}\right) - \sum_{i=1}^n \lambda x_i^2.
+\end{align}
+\]</span> Calculating <span class="math inline">\(\frac{\partial l}{\partial \lambda}\)</span> and equalling it to <span class="math inline">\(0\)</span>, we can obtain a maximum likelihood estimator for <span class="math inline">\(\lambda\)</span>. <span class="math display">\[
+\begin{aligned}
+\frac{\partial l}{\partial \lambda} &amp;= \frac{n}{2\lambda} - \sum_{i=1}^n x_i^2 = 0 \\
+\Rightarrow \lambda &amp;= \sum_{i=1}^n \frac{1}{2 x_i^2} . 
+\end{aligned}
+\]</span> ##### Solution (c)</p>
 </div>
 </div>
 </div>

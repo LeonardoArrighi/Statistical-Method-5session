@@ -100,6 +100,7 @@ roller.lm2 <- lm(depression~weight+I(weight^2), data=roller_mod)
 anova(roller.lm, roller.lm2)
 ```
 Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models.
+
 ##### Conclusion
 
 We confirm our initial choice, namely there is no statistical reason to prefer one model to the other.
@@ -284,6 +285,7 @@ k &=\frac{1}{\sqrt{2\pi\frac{(x-1)^2}{2\lambda}}} \\
 &= \sqrt{\frac{\lambda}{\pi(x-1)^2}}.
 \end{aligned}
 $$
+
 ##### Solution (b)
 Starting from the previous result, we can assume:
 $$
@@ -310,5 +312,6 @@ $$
 \Rightarrow \lambda &= \sum_{i=1}^n \frac{1}{2 x_i^2} . 
 \end{aligned}
 $$
+
 ##### Solution (c)
 
