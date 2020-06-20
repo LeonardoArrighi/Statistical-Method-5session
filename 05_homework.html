@@ -638,7 +638,7 @@ Cov(Y_j-\bar{Y},\bar{Y}) &amp;= Cov(Y_j,\bar{Y})-Cov(\bar{Y},\bar{Y})\\
 <h3>Chapter 4</h3>
 <div id="exercise-4" class="section level4 tabset">
 <h4>Exercise 4</h4>
-<p>Suppose that you have <span class="math inline">\(n\)</span> independent measurements of times between major aircraft disasters, <span class="math inline">\(t_i\)</span>, and believe that the probability density function for the <span class="math inline">\(t_i\)</span>’s is of the form: <span class="math inline">\(f(t) = ke ^{−\lambda t}, t \geq 0\)</span> where <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(k\)</span> are the same for all <span class="math inline">\(i\)</span>.</p>
+<p>Suppose that you have <span class="math inline">\(n\)</span> independent measurements of times between major aircraft disasters, <span class="math inline">\(t_i\)</span>, and believe that the probability density function for the <span class="math inline">\(t_i\)</span>’s is of the form: <span class="math inline">\(f(t) = ke ^{−\lambda t^2}, t \geq 0\)</span> where <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(k\)</span> are the same for all <span class="math inline">\(i\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>By considering the normal p.d.f., show that <span class="math inline">\(k = \sqrt{4\lambda/\pi}\)</span>.</p></li>
 <li><p>Obtain a maximum likelihood estimator for <span class="math inline">\(\lambda\)</span>.</p></li>
@@ -651,7 +651,7 @@ f(t) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{t-\mu}{\sigma}\ri
 \]</span> we can procede computing algebric steps to link the normal p.d.f. to the given one. <span class="math display">\[
 \begin{align}
 f(t) &amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}\\
-&amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} (t^2)} \qquad (\mu = xt)\\
+&amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} t^2} \qquad (\mu = xt)\\
 \end{align}
 \]</span> Hence: <span class="math display">\[
 \begin{cases}
@@ -709,9 +709,9 @@ l_hat &lt;- loglikelihood(T_i, lambda_hat)
 LR &lt;- 2 * (l_hat - l_0)
 print(paste(&quot;Likelihood ratio test statistic is = &quot;, LR))</code></pre>
 <pre><code>## [1] &quot;Likelihood ratio test statistic is =  28.6676508967783&quot;</code></pre>
-<pre class="r"><code>p_lrt &lt;- pchisq(LR, df=2, lower.tail = FALSE)
-print(paste(&quot;p-value of Likelihood ratio test :&quot;, p_lrt))</code></pre>
-<pre><code>## [1] &quot;p-value of Likelihood ratio test : 5.95523224811094e-07&quot;</code></pre>
+<pre class="r"><code>p_lrt &lt;- pchisq(LR, df=1, lower.tail = FALSE)
+print(paste(&quot;p-value of likelihood ratio test is =&quot;, p_lrt))</code></pre>
+<pre><code>## [1] &quot;p-value of likelihood ratio test is = 8.59271921510837e-08&quot;</code></pre>
 </div>
 </div>
 </div>

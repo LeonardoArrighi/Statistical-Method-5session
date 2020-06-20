@@ -248,7 +248,7 @@ Then, we can conclude that $\bar{Y}$ and $\hat{Y}=(Y_1-\bar{Y},Y_2-\bar{Y},Y_3-\
 
 #### Exercise 4 {.tabset}
 
-Suppose that you have $n$ independent measurements of times between major aircraft disasters, $t_i$, and believe that the probability density function for the $t_i$’s is of the form: $f(t) = ke ^{−\lambda t}, t \geq 0$ where $\lambda$ and $k$ are the same for all $i$. 
+Suppose that you have $n$ independent measurements of times between major aircraft disasters, $t_i$, and believe that the probability density function for the $t_i$’s is of the form: $f(t) = ke ^{−\lambda t^2}, t \geq 0$ where $\lambda$ and $k$ are the same for all $i$. 
 
 (a) By considering the normal p.d.f., show that $k = \sqrt{4\lambda/\pi}$. 
 
@@ -268,7 +268,7 @@ we can procede computing algebric steps to link the normal p.d.f. to the given o
 $$
 \begin{align}
 f(t) &= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}\\
-&= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} (t^2)} \qquad (\mu = xt)\\
+&= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} t^2} \qquad (\mu = xt)\\
 \end{align}
 $$
 Hence:
