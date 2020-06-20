@@ -100,6 +100,7 @@ roller.lm2 <- lm(depression~weight+I(weight^2), data=roller_mod)
 anova(roller.lm, roller.lm2)
 ```
 Now the p-value is even higher than before. This means that the points analysed were not problematic in terms of comparison of the two models.
+
 ##### Conclusion
 
 We confirm our initial choice, namely there is no statistical reason to prefer one model to the other.
@@ -109,14 +110,12 @@ We confirm our initial choice, namely there is no statistical reason to prefer o
 #### Exercise 11
 The table UCBAdmissions was discussed in Subsection 2.2.1. The following gives a table
 that adds the 2 × 2 tables of admission data over all departments:
-` ## UCBAdmissions is in the datasets package For each combination of margins 1 and 2, calculate the sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)`
-
+`sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)`
 
 ##### Solution
 
 ```{r}
 UCBAdmissions <- UCBAdmissions
-UCBAdmissions
 sumUCBtotal <- apply(UCBAdmissions, c(1,2), sum)
 sumUCBtotal
 ```
@@ -144,11 +143,14 @@ sumUCBtotal
 ```
 The Mantel-Haenszel test is an inferential test for the association between two binary variables, while controlling for a third confounding nominal variable. Essentially, the test examines the weighted association of a set of $2 × 2$ tables.
 In our case, we check if there is an association between the *Gender* and *Admit* over the different departments.
-The null-hypothesis states that there is no association between the two variables and it is possible to observe that the p-values is equal to $0.2323$, thus the test is not statistically significant and we accept $H_0$.
-The table `sumUCBtotal` it is possible to observe that there are more admitted males that females but also more rejected males than females.
+The null-hypothesis states that there is no association between the two variables and it is possible to observe that the p-values is equal to $0.2323$, thus we do not reject $H_0$.
+However, the table `sumUCBtotal` shows that there are more admitted males that females, therefore data seems to suggests differently that the result of the Mantel-Haenszel test. Moreover, if we do a $\chi^2$-test on `sumUCBtotal` we obtain the following,
+```{r}
+chisq.test(sumUCBtotal)
+```
+which means that we have a strong evidence against $H_0$ and that we should reject it.
 
-
-The Mantel–Haenzel test is valid only if the male-to-female odds ratio for admission is
+(c) The Mantel–Haenzel test is valid only if the male-to-female odds ratio for admission is
 similar across departments. The following code calculates the relevant odds ratios:
 `apply(UCBAdmissions, 3, function(x) (x[1,1]*x[2,2])/(x[1,2]*x[2,1]))`
 Is the odds ratio consistent across departments? Which department(s) stand(s) out as
@@ -160,21 +162,7 @@ apply(UCBAdmissions, 3,
       function(x) (x[1,1]*x[2,2])/(x[1,2]*x[2,1])
       )
 ```
-The odds ration is not consistent across the departments. In particular, department A has a very low odds ratio compared to the others. The nature of this difference can be observed in the mosaic plots showed above, where it is possible to notice that the number of females is significantly lower than the number of males. (Also department B has this problem.)
-
-#### Exercise x
-
-Text here.
-
-
-
-##### Observations
-
-Observations.
-
-##### Conclusion
-
-Conclusions.
+The odds ration is not consistent across the departments. In particular, department A has a very low odds ratio compared to the others. The nature of this difference can be observed in the mosaic plots showed above, where it is possible to notice that the number of females is significantly lower than the number of males, but the ratio of admitted females is significantly higher than the males one (females: $89/(89+19) = 0.82$, males: $512/(313+512) = 0.62$). This explaines why the Mantel–Haenzel test is not proper for this data as the ratios for each department is not similar across all the departments.
 
 
 
