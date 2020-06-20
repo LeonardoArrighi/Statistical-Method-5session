@@ -314,4 +314,9 @@ $$
 $$
 
 ##### Solution (c)
-
+Starting from the previously calculated formula for the loglikelihood, we are able to compute the likelihood ratio test (LR):
+$$
+LR(H_0)=2\left(l(\hat{\lambda})-l(\hat{\lambda_{H_0}})\right)
+$$
+```{r CS4.4, code = readLines("src/CS4.4.R"), echo=TRUE}
+```

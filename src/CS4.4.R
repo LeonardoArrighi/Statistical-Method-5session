@@ -1,8 +1,21 @@
 # given values for T_i
 T_i = c(243, 14, 121, 63, 45, 407, 34)
 
-# compute estimation
-lambda_hat <- 1/(2 * sum(T_i))
+# compute loglikelihood
+loglikelihood <- function(x, lambda){
+  length(x) * log(sqrt(4 * lambda / pi)) - lambda * sum(x^2)
+}
 
-# compute likelihood
-LR = 2 * (lambda_hat - )
+# compute estimation
+lambda_hat <- length(T_i)/(2 * sum(T_i^2))
+
+print(paste("MLE for lambda = ", lambda_hat))
+
+l_0 <- loglikelihood(T_i, 10^(-4))
+l_hat <- loglikelihood(T_i, lambda_hat)
+
+LR <- 2 * (l_hat - l_0)
+print(paste("Likelihood ratio test statistic is = ", LR))
+
+p_lrt <- pchisq(LR, df=2, lower.tail = FALSE)
+print(paste("p-value of likelihood ratio test is =", p_lrt))

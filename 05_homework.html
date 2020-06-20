@@ -663,7 +663,11 @@ k= \frac{1}{\sqrt{2\pi\sigma^2}}
 k &amp;=\frac{1}{\sqrt{2\pi\frac{(x-1)^2}{2\lambda}}} \\
 &amp;= \sqrt{\frac{\lambda}{\pi(x-1)^2}}.
 \end{aligned}
-\]</span> ##### Solution (b) Starting from the previous result, we can assume: <span class="math display">\[
+\]</span></p>
+</div>
+<div id="solution-b" class="section level5">
+<h5>Solution (b)</h5>
+<p>Starting from the previous result, we can assume: <span class="math display">\[
 t_i \sim f(t) = \sqrt{\frac{4\lambda}{\pi}}e^{-\lambda t^2}
 \]</span> where <span class="math inline">\(\lambda\)</span> is the same for all <span class="math inline">\(i\)</span>. Due to the fact that <span class="math inline">\(t_i\)</span>s are i.i.d., from the definition of loglikelihood, we can obtain a good estimator for <span class="math inline">\(\lambda\)</span> calculating: <span class="math display">\[
 l(\lambda) = \log(f(t|\lambda)).
@@ -679,7 +683,35 @@ l(\lambda) &amp;= \sum_{i=1}^n \log(f(x_i|\lambda))\\
 \frac{\partial l}{\partial \lambda} &amp;= \frac{n}{2\lambda} - \sum_{i=1}^n x_i^2 = 0 \\
 \Rightarrow \lambda &amp;= \sum_{i=1}^n \frac{1}{2 x_i^2} . 
 \end{aligned}
-\]</span> ##### Solution (c)</p>
+\]</span></p>
+</div>
+<div id="solution-c" class="section level5">
+<h5>Solution (c)</h5>
+<p>Starting from the previously calculated formula for the loglikelihood, we are able to compute the likelihood ratio test (LR): <span class="math display">\[
+LR(H_0)=2\left(l(\hat{\lambda})-l(\hat{\lambda_{H_0}})\right)
+\]</span></p>
+<pre class="r"><code># given values for T_i
+T_i = c(243, 14, 121, 63, 45, 407, 34)
+
+# compute loglikelihood
+loglikelihood &lt;- function(x, lambda){
+  length(x) * log(sqrt(4 * lambda / pi)) - lambda * sum(x^2)
+}
+
+# compute estimation
+lambda_hat &lt;- length(T_i)/(2 * sum(T_i^2))
+
+print(paste(&quot;MLE for lambda = &quot;, lambda_hat))</code></pre>
+<pre><code>## [1] &quot;MLE for lambda =  1.41881346656667e-05&quot;</code></pre>
+<pre class="r"><code>l_0 &lt;- loglikelihood(T_i, 10^(-4))
+l_hat &lt;- loglikelihood(T_i, lambda_hat)
+
+LR &lt;- 2 * (l_hat - l_0)
+print(paste(&quot;Likelihood ratio test statistic is = &quot;, LR))</code></pre>
+<pre><code>## [1] &quot;Likelihood ratio test statistic is =  28.6676508967783&quot;</code></pre>
+<pre class="r"><code>p_lrt &lt;- pchisq(LR, df=2, lower.tail = FALSE)
+print(paste(&quot;p-value of Likelihood ratio test :&quot;, p_lrt))</code></pre>
+<pre><code>## [1] &quot;p-value of Likelihood ratio test : 5.95523224811094e-07&quot;</code></pre>
 </div>
 </div>
 </div>
