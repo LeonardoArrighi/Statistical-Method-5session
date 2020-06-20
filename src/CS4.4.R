@@ -14,8 +14,8 @@ print(paste("MLE for lambda = ", lambda_hat))
 l_0 <- loglikelihood(T_i, 10^(-4))
 l_hat <- loglikelihood(T_i, lambda_hat)
 
-LR <- 2 * (l_hat - l_0)
-print(paste("Likelihood ratio test statistic is = ", LR))
+V <- 2 * (l_hat - l_0)
+print(paste("Likelihood ratio test statistic is = ", V))
 
-p_lrt <- pchisq(LR, df=1, lower.tail = FALSE)
+p_lrt <- pchisq(V, df=1, lower.tail = FALSE)
 print(paste("p-value of likelihood ratio test is =", p_lrt))

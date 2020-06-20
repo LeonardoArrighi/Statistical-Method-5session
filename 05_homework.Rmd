@@ -217,7 +217,7 @@ Due to the fact that $Y_1$, $Y_2$ and $Y_3$ are independent and distributed as $
 $$
 \bar{Y}\sim N\left(\mu,\frac{\sigma^2}{n}\right).
 $$
-Due to the fact that $Z$ is a function of $Y_1$, $Y_2$ and $Y_3$, only, it is independent to $\bar{Y}$.
+Due to the fact that $Z$ is a function of $Y_1$, $Y_2$ and $Y_3$, only, it is not directly dependent on $\bar{Y}$.
 Hence, calling $Y=(Y_1,Y_2,Y_3)$, we can notice that, from the definition of scalar product:
 $$
 A\cdot Y = \begin{cases} \bar Y \\ 
@@ -225,7 +225,7 @@ Y_1 - \bar{Y}\\
 Y_2 - \bar{Y}
 \end{cases}
 $$
-Observing that the sum of two independent normal random variables has a normal distribution, we can conclude that $Y_1 - \bar{Y}$ and $Y_2 - \bar{Y}$ have a normal distribution and, similarly, we can obtain the same result for $Y_3 - \bar{Y}$). 
+We can observe that the linear transformation of a multivariate normal random vector also has a multivariate normal distribution. We can extend the same result for $Y_3 - \bar{Y}$, changing simply the order of the basis of the vector. 
 More specifically, for $j=1,2,3$:
 $$
 \begin{align}
@@ -264,25 +264,24 @@ Recalling the definition of normal p.d.f.:
 $$
 f(t) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{t-\mu}{\sigma}\right)^2},
 $$
-we can procede computing algebric steps to link the normal p.d.f. to the given one.
+taking into account that $t\geq 0$, we can procede computing algebric steps to link the normal p.d.f. to the given one.
 $$
-\begin{align}
-f(t) &= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}\\
-&= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} t^2} \qquad (\mu = xt)\\
-\end{align}
+f(t) = \frac{2}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}
 $$
+We can also observe that, in the given distribution, there is only a quadratic term for $t$, so we can assume that $\mu = 0$.
+
 Hence:
 $$
 \begin{cases}
-\lambda = \frac{(x-1)^2}{2\sigma^2} \\
-k= \frac{1}{\sqrt{2\pi\sigma^2}}
+\lambda = \frac{1}{2\sigma^2} \\
+k= \frac{2}{\sqrt{2\pi\sigma^2}}
 \end{cases}
 $$
 substituting the first equation in the following one, we can obtain the result:
 $$
 \begin{aligned}
-k &=\frac{1}{\sqrt{2\pi\frac{(x-1)^2}{2\lambda}}} \\
-&= \sqrt{\frac{\lambda}{\pi(x-1)^2}}.
+k &=\frac{2}{\sqrt{2\pi\left(\frac{1}{2\lambda}\right)}} \\
+&= \sqrt{\frac{4\lambda}{\pi}}.
 \end{aligned}
 $$
 
@@ -316,7 +315,11 @@ $$
 ##### Solution (c)
 Starting from the previously calculated formula for the loglikelihood, we are able to compute the likelihood ratio test (LR):
 $$
-LR(H_0)=2\left(l(\hat{\lambda})-l(\hat{\lambda_{H_0}})\right)
+V(H_0)=2\left(l(\hat{\lambda})-l(\hat{\lambda_{H_0}})\right)
 $$
 ```{r CS4.4, code = readLines("src/CS4.4.R"), echo=TRUE}
 ```
+
+###### Conclusions
+
+The obtained small value of the p-value indicates that there is a strong evidence against the null hypothesis.

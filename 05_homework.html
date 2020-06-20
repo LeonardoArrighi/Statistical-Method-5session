@@ -614,12 +614,12 @@ Z=\sum_{i=1}^3 (Y_i - \bar{Y})^2
 <h5>Solution</h5>
 <p>Due to the fact that <span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span> and <span class="math inline">\(Y_3\)</span> are independent and distributed as <span class="math inline">\(N(\mu,\sigma^2)\)</span>: <span class="math display">\[
 \bar{Y}\sim N\left(\mu,\frac{\sigma^2}{n}\right).
-\]</span> Due to the fact that <span class="math inline">\(Z\)</span> is a function of <span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span> and <span class="math inline">\(Y_3\)</span>, only, it is independent to <span class="math inline">\(\bar{Y}\)</span>. Hence, calling <span class="math inline">\(Y=(Y_1,Y_2,Y_3)\)</span>, we can notice that, from the definition of scalar product: <span class="math display">\[
+\]</span> Due to the fact that <span class="math inline">\(Z\)</span> is a function of <span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span> and <span class="math inline">\(Y_3\)</span>, only, it is not directly dependent on <span class="math inline">\(\bar{Y}\)</span>. Hence, calling <span class="math inline">\(Y=(Y_1,Y_2,Y_3)\)</span>, we can notice that, from the definition of scalar product: <span class="math display">\[
 A\cdot Y = \begin{cases} \bar Y \\ 
 Y_1 - \bar{Y}\\
 Y_2 - \bar{Y}
 \end{cases}
-\]</span> Observing that the sum of two independent normal random variables has a normal distribution, we can conclude that <span class="math inline">\(Y_1 - \bar{Y}\)</span> and <span class="math inline">\(Y_2 - \bar{Y}\)</span> have a normal distribution and, similarly, we can obtain the same result for <span class="math inline">\(Y_3 - \bar{Y}\)</span>). More specifically, for <span class="math inline">\(j=1,2,3\)</span>: <span class="math display">\[
+\]</span> We can observe that the linear transformation of a multivariate normal random vector also has a multivariate normal distribution. We can extend the same result for <span class="math inline">\(Y_3 - \bar{Y}\)</span>, changing simply the order of the basis of the vector. More specifically, for <span class="math inline">\(j=1,2,3\)</span>: <span class="math display">\[
 \begin{align}
 Y_j - \bar{Y} &amp;= \frac{2}{3} Y_j - \frac{1}{3}\sum_{i\neq j} Y_i \\
 &amp;\sim N\left(\frac{2\,\mu}{3}-\frac{2\,\mu}{3}, \, 4\cdot\frac{\sigma^2}{9}+2\cdot\frac{\sigma^2}{9}\right)\\
@@ -648,20 +648,18 @@ Cov(Y_j-\bar{Y},\bar{Y}) &amp;= Cov(Y_j,\bar{Y})-Cov(\bar{Y},\bar{Y})\\
 <h5>Solution (a)</h5>
 <p>Recalling the definition of normal p.d.f.: <span class="math display">\[
 f(t) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{t-\mu}{\sigma}\right)^2},
-\]</span> we can procede computing algebric steps to link the normal p.d.f. to the given one. <span class="math display">\[
-\begin{align}
-f(t) &amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}\\
-&amp;= \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-1)^2}{2 \sigma^2} t^2} \qquad (\mu = xt)\\
-\end{align}
-\]</span> Hence: <span class="math display">\[
+\]</span> taking into account that <span class="math inline">\(t\geq 0\)</span>, we can procede computing algebric steps to link the normal p.d.f. to the given one. <span class="math display">\[
+f(t) = \frac{2}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2 \sigma^2} \left( t^2 - 2\mu t + \mu^2 \right)}
+\]</span> We can also observe that, in the given distribution, there is only a quadratic term for <span class="math inline">\(t\)</span>, so we can assume that <span class="math inline">\(\mu = 0\)</span>.</p>
+<p>Hence: <span class="math display">\[
 \begin{cases}
-\lambda = \frac{(x-1)^2}{2\sigma^2} \\
-k= \frac{1}{\sqrt{2\pi\sigma^2}}
+\lambda = \frac{1}{2\sigma^2} \\
+k= \frac{2}{\sqrt{2\pi\sigma^2}}
 \end{cases}
 \]</span> substituting the first equation in the following one, we can obtain the result: <span class="math display">\[
 \begin{aligned}
-k &amp;=\frac{1}{\sqrt{2\pi\frac{(x-1)^2}{2\lambda}}} \\
-&amp;= \sqrt{\frac{\lambda}{\pi(x-1)^2}}.
+k &amp;=\frac{2}{\sqrt{2\pi\left(\frac{1}{2\lambda}\right)}} \\
+&amp;= \sqrt{\frac{4\lambda}{\pi}}.
 \end{aligned}
 \]</span></p>
 </div>
@@ -688,7 +686,7 @@ l(\lambda) &amp;= \sum_{i=1}^n \log(f(x_i|\lambda))\\
 <div id="solution-c" class="section level5">
 <h5>Solution (c)</h5>
 <p>Starting from the previously calculated formula for the loglikelihood, we are able to compute the likelihood ratio test (LR): <span class="math display">\[
-LR(H_0)=2\left(l(\hat{\lambda})-l(\hat{\lambda_{H_0}})\right)
+V(H_0)=2\left(l(\hat{\lambda})-l(\hat{\lambda_{H_0}})\right)
 \]</span></p>
 <pre class="r"><code># given values for T_i
 T_i = c(243, 14, 121, 63, 45, 407, 34)
@@ -706,12 +704,16 @@ print(paste(&quot;MLE for lambda = &quot;, lambda_hat))</code></pre>
 <pre class="r"><code>l_0 &lt;- loglikelihood(T_i, 10^(-4))
 l_hat &lt;- loglikelihood(T_i, lambda_hat)
 
-LR &lt;- 2 * (l_hat - l_0)
-print(paste(&quot;Likelihood ratio test statistic is = &quot;, LR))</code></pre>
+V &lt;- 2 * (l_hat - l_0)
+print(paste(&quot;Likelihood ratio test statistic is = &quot;, V))</code></pre>
 <pre><code>## [1] &quot;Likelihood ratio test statistic is =  28.6676508967783&quot;</code></pre>
-<pre class="r"><code>p_lrt &lt;- pchisq(LR, df=1, lower.tail = FALSE)
+<pre class="r"><code>p_lrt &lt;- pchisq(V, df=1, lower.tail = FALSE)
 print(paste(&quot;p-value of likelihood ratio test is =&quot;, p_lrt))</code></pre>
 <pre><code>## [1] &quot;p-value of likelihood ratio test is = 8.59271921510837e-08&quot;</code></pre>
+<div id="conclusions" class="section level6">
+<h6>Conclusions</h6>
+<p>The obtained small value of the p-value indicates that there is a strong evidence against the null hypothesis.</p>
+</div>
 </div>
 </div>
 </div>
