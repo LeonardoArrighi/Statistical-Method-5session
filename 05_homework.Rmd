@@ -223,12 +223,7 @@ apply(UCBAdmissions, 3,
       function(x) (x[1,1]*x[2,2])/(x[1,2]*x[2,1])
       )
 ```
-<<<<<<< HEAD
-The odds ration is not consistent across the departments. In particular, department A has a very low odds ratio compared to the others. The nature of this difference can be observed in the mosaic plots showed above, where it is possible to notice that the number of females is significantly lower than the number of males. (Also department B has this problem.)
-=======
 The odds ration is not consistent across the departments. In particular, department A has a very low odds ratio compared to the others. The nature of this difference can be observed in the mosaic plots showed above, where it is possible to notice that the number of females is significantly lower than the number of males, but the ratio of admitted females is significantly higher than the males one (females: $89/(89+19) = 0.82$, males: $512/(313+512) = 0.62$). This explaines why the Mantel–Haenzel test is not proper for this data as the ratios for each department is not similar across all the departments.
-
->>>>>>> eros
 
 ## CS EXERCISES {.tabset}
 
