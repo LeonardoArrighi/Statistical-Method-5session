@@ -74,6 +74,8 @@ where $y_{(n)}$ is the maximum observation. To illustrate this situation, suppos
 #### Solution (a)  
 
 Use R to compute the posterior probabilities of *N* on a grid of values.  
+
+The computation of probabilities of *N* outputs a series of non normalized probabilities over the considered interval. This, obviously, may produce some inconsistency with our constraint about the upper bound of the interval within each the parameter under our analysis is considered to belong to. Therefore, we proceed with the normalization of the probabilities over the considered interval in order to make them sum to one.  
 ```{r echo = TRUE, message = FALSE, comment = "", fig.align = "center", fig.height = 3.5, fig.width = 7.5}
 require(ggplot2)
 
@@ -81,11 +83,7 @@ sample <- c(43, 24, 100, 35, 85)
 b      <- 200
 n      <- seq(max(sample), b, 1)
 
-# We normalize the considered interval in order to make probabilities sum to 1. 
-# The reason behind this decision is related to our prior belief about the upper
-# bound of N and the subsequent interval within each the latter is considered to
-# belong to. 
-
+# Normalization;
 norm_prob <- 1/n^max(sample) / sum(1/n^max(sample))
 cat(sum(norm_prob))
 
@@ -96,7 +94,7 @@ ggplot() +
              size  = 1.5,
              color = "black") +
   
-  # Custom Labels;
+  # Custom labels;
   labs(title = "Estimation of the upper bound of an uniform distribution",
        x     = expression(N),
        y     = "p(N|y[1],...,y[n])") +
@@ -106,29 +104,26 @@ ggplot() +
 #### Solution (b)  
 
 Compute the posterior mean and posterior standard deviation of *N*.  
+
+To compute the posterior mean and standard deviation we weight the values of *N* with the previously normalized probabilities over the considered interval. The estimator of the standard deviation of *N* we'll be using the weighted mean in this case. 
 ```{r echo = TRUE, message = FALSE, comment = "", fig.align = "center", fig.height = 3.5, fig.width = 7.5}
 dtf <- data.frame(x = n,
                   y = norm_prob)
 
-# Mean - to compute the posterior mean and standard deviation we weight the values 
-# of *N* with the normalized probabilities over the considered interval.  
-
+# Weighted mean;
 weighted_mean <- sum(dtf$x * dtf$y)
 cat(weighted_mean)
 
-# Standard deviation - as for the standard deviation we'll be using the weighted mean.
-
+# Weighted standard deviation;
 cat(sqrt(sum(dtf$y * (dtf$x - weighted_mean)^2)))
 ```
 
 #### Solution (c)  
 
 Find the probability that there are more than 150 taxis in the city.  
+
+Having normalized probabilites allows us to sum those associated with values of N greater than 150 in order to find $P(N>150|y_{1},\dots,y_{n})$.  
 ```{r echo = TRUE, message = FALSE, comment = "", fig.align = "center", fig.height = 3.5, fig.width = 7.5}
-
-# P(N > 150|y_{1},...,y_{n}) - since we're using normalized probabilities, it is
-# enough to sum those associated with values of N greater than 150.
-
 cat(sum(dtf[which(dtf$x > 150), 2]))
 ```
 
