@@ -230,30 +230,6 @@ The odds ration is not consistent across the departments. In particular, departm
 
 >>>>>>> eros
 
-
-## CASI EXERCISES {.tabset}
-
-### Chapter x {.tabset}
-
-#### Exercise x
-
-Text here.
-
-##### Solution
-
-```{r Test_ex, code = readLines("src/Test_ex.R"), echo=TRUE}
-```
-
-##### Observations
-
-Observations.
-
-##### Conclusion
-
-Conclusions.
-
-
-
 ## CS EXERCISES {.tabset}
 
 ### Chapter 1 {.tabset}
