@@ -351,7 +351,7 @@ Calculating $\frac{\partial l}{\partial \lambda}$ and equalling it to $0$, we ca
 $$
 \begin{aligned}
 \frac{\partial l}{\partial \lambda} &= \frac{n}{2\lambda} - \sum_{i=1}^n x_i^2 = 0 \\
-\Rightarrow \lambda &= \sum_{i=1}^n \frac{1}{2 x_i^2} . 
+\Rightarrow \lambda &= n \,\sum_{i=1}^n \frac{1}{2 x_i^2} . 
 \end{aligned}
 $$
 
