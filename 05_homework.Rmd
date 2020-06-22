@@ -105,7 +105,8 @@ dtf <- data.frame(x = n,
                   y = norm_prob)
 
 # Mean;
-cat(sum(dtf$x * dtf$y))
+weighted_mean <- sum(dtf$x * dtf$y)
+cat(weighted_mean)
 
 # Standard deviation;
 cat(sqrt(sum(dtf$y * (dtf$x - weighted_mean)^2)))
